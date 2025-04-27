@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Atendimento</ion-title>
+    <ion-toolbar>
+      <ion-title>
+        Atendimento
+        <ion-badge color="light" *ngIf="qtdSenhasNaoAtendidas !== null">
+          {{ qtdSenhasNaoAtendidas }} pendente(s)
+        </ion-badge>
+      </ion-title>
+    </ion-toolbar>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button expand="full" color="primary" (click)="chamarProximaSenha()">
+    Chamar próxima senha
+  </ion-button>
+  <ion-button expand="full" color="danger" (click)="encerrarExpediente()">
+    Encerrar expediente
+  </ion-button>
+
+
+  <ion-card *ngIf="senhaAtual">
+    <ion-card-header>
+      <ion-card-title>Senha em atendimento</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h2>{{ senhaAtual.numero }}</h2>
+      <p>Tipo: {{ senhaAtual.tipo }}</p>
+      <p>Hora de emissão: {{ formatarData(senhaAtual.dataHoraEmissao) }}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list>
+    <ion-list-header>Últimas 5 chamadas</ion-list-header>
+    <ion-item *ngFor="let senha of ultimasChamadas">
+      {{ senha.numero }} - {{ senha.tipo }}
+    </ion-item>
+  </ion-list>
+</ion-content>
